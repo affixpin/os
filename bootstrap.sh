@@ -8,4 +8,6 @@ sv start ntpd
 
 basestrap /mnt base base-devel runit elogind-runit
 basestrap /mnt linux linux-firmware
+basestrap /mnt wpa_supplicant dhcpcd neovim efibootmgr
+
 fstabgen -U /mnt >> /mnt/etc/fstab
