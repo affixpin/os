@@ -1,7 +1,7 @@
 #! /bin/bash
 
-export WIFI_SSID=MEO-05C0B0
-export WIFI_PASSWORD=a8b1cb23461
+export WIFI_SSID=
+export WIFI_PASSWORD=
 
 rfkill unblock wlan
 ip link set wlan0 up
