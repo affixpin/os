@@ -1,11 +1,10 @@
 #! /bin/bash
 
 export WIFI_SSID=MEO-05C0B0
-export WIFI_PASSWORD=a8b1cb2346|ZZ
+export WIFI_PASSWORD=a8b1cb23461
 
-# rfkill unblock wlan
-# ip link set wlan0 down
-# ip link set wlan0 up
+rfkill unblock wlan
+ip link set wlan0 up
 
 if [ -z "$WIFI_SSID" ]; then
   iw wlan0 scan | grep  SSID:
@@ -19,7 +18,15 @@ if [ -z "$WIFI_PASSWORD" ]; then
 fi
 
 wpa_passphrase $WIFI_SSID $WIFI_PASSWORD > /etc/wpa_supplicant/wpa_supplicant.conf
-sudo ln -s /etc/runit/sv/wpa_supplicant /etc/runit/runsvdir/default/
+
+if [ ! -e /etc/runit/runsvdir/default/wpa_supplicant ]; then
+  sudo ln -s /etc/runit/sv/wpa_supplicant /etc/runit/runsvdir/default/
+fi
+
 sv start wpa_supplicant
-sudo ln -s /etc/runit/sv/dhcpcd /etc/runit/runsvdir/default/
+
+if [ ! -e /etc/runit/runsvdir/default/dhcpcd ]; then
+  sudo ln -s /etc/runit/sv/dhcpcd /etc/runit/runsvdir/default/
+fi
+
 sv start dhcpcd
