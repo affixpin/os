@@ -8,6 +8,6 @@ sv start ntpd
 
 basestrap /mnt base base-devel runit elogind-runit
 basestrap /mnt linux linux-firmware intel-ucode
-basestrap /mnt dhcpcd dhcpcd-runit wpa_supplicant wpa_supplicant-runit neovim efibootmgr git mkinitcpio cryptsetup cryptsetup-runit
+basestrap /mnt dhcpcd dhcpcd-runit wpa_supplicant wpa_supplicant-runit neovim efibootmgr git mkinitcpio cryptsetup cryptsetup-runit neofetch man-db mesa
 
 fstabgen -U /mnt >> /mnt/etc/fstab
