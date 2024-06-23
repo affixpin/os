@@ -7,7 +7,7 @@ fi
 sv start ntpd
 
 basestrap /mnt base base-devel runit elogind-runit
-basestrap /mnt linux linux-firmware intel-ucode
-basestrap /mnt dhcpcd dhcpcd-runit wpa_supplicant wpa_supplicant-runit neovim efibootmgr git mkinitcpio cryptsetup cryptsetup-runit neofetch man-db mesa
+basestrap /mnt linux-lts linux-firmware intel-ucode
+basestrap /mnt dhcpcd dhcpcd-runit wpa_supplicant wpa_supplicant-runit neovim efibootmgr git mkinitcpio cryptsetup cryptsetup-runit neofetch man-db mesa sudo sway
 
 fstabgen -U /mnt >> /mnt/etc/fstab

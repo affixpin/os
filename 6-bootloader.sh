@@ -7,4 +7,5 @@ if [ -z "$ROOT_PARTITION_UUID" ]; then
   exit
 fi
 
-efibootmgr --create --disk /dev/nvme0n1 --part 1 --label artix --loader /vmlinuz-linux --unicode "cryptdevice=UUID=$ROOT_PARTITION_UUID:root root=/dev/mapper/root debug quite rw initrd=initramfs-linux.img"
+# efibootmgr --create --disk /dev/nvme0n1 --part 1 --label artix --loader /vmlinuz-linux --unicode "cryptdevice=UUID=$ROOT_PARTITION_UUID:root root=/dev/mapper/root quite rw initrd=initramfs-linux.img"
+efibootmgr --create --disk /dev/nvme0n1 --part 1 --label artix --loader /vmlinuz-linux-lts --unicode "cryptdevice=UUID=$ROOT_PARTITION_UUID:root root=/dev/mapper/root quite rw initrd=initramfs-linux-lts.img"
