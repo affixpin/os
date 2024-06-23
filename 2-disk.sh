@@ -1,4 +1,8 @@
 #! /bin/bash
+set -e
+
+pacman -Sy
+
 source ./vars.sh
 
 echo "Installing parted utility to make partitioning process easier"
@@ -9,24 +13,27 @@ if [ ! -b "$DISK" ]; then
 	echo "Disk $DISK does not exist."
 	exit
 fi
-
+echo "GPT..."
 parted $DISK --script mklabel gpt
 
+echo "ESP.."
 ESP_OFFSET_MB=$(($ESP_SIZE_MB + $OFFSET_MB))
 parted $DISK --script mkpart ESP fat32 "$OFFSET_MB"MiB "$ESP_OFFSET_MB"MiB
 
+echo "SWAP.."
 SWAP_OFFSET_MB=$(($SWAP_SIZE_MB + $ESP_OFFSET_MB))
 parted $DISK --script mkpart primary linux-swap "$ESP_OFFSET_MB"MiB "$SWAP_OFFSET_MB"MiB
 
+echo "ROOT.."
 ROOT_OFFSET="100%"
 parted $DISK --script mkpart primary ext4 "$SWAP_OFFSET_MB"MiB "$ROOT_OFFSET"
 
 cryptsetup -y -v luksFormat "$DISK"p3
 cryptsetup open "$DISK"p3 $ROOT_NAME
-mkfs.ext4 -L $ROOT_NAME /dev/mapper/$ROOT_NAME
+mkfs.ext4 /dev/mapper/$ROOT_NAME
 
 mount /dev/mapper/$ROOT_NAME /mnt
-mkfs.fat -L esp -F 32 "$DISK"p1
+mkfs.fat -F 32 "$DISK"p1
 
 mount --mkdir "$DISK"p1 /mnt/boot
 mkswap -L $SWAP_NAME "$DISK"p2

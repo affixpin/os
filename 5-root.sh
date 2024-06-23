@@ -1,4 +1,7 @@
 #! /bin/bash
+# change root before the script: artix-chroot /mnt
+
+set -e
 
 ln -sf /usr/share/zoneinfo/Europe/Lisbon /etc/localtime
 hwclock --systohc
