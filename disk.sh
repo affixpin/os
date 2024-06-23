@@ -23,10 +23,10 @@ parted $DISK --script mkpart primary ext4 "$SWAP_OFFSET_MB"MiB "$ROOT_OFFSET"
 
 cryptsetup -y -v luksFormat "$DISK"p3
 cryptsetup open "$DISK"p3 $ROOT_NAME
-mkfs.ext4 /dev/mapper/$ROOT_NAME
+mkfs.ext4 -L $ROOT_NAME /dev/mapper/$ROOT_NAME
 
 mount /dev/mapper/$ROOT_NAME /mnt
-mkfs.fat -F 32 "$DISK"p1
+mkfs.fat -L esp -F 32 "$DISK"p1
 
 mount --mkdir "$DISK"p1 /mnt/boot
-mkfs.ext4 -L $SWAP_NAME "$DISK"p2
+mkswap -L $SWAP_NAME "$DISK"p2

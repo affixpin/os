@@ -9,4 +9,4 @@ touch /etc/hostname
 echo "x" >> /etc/hostname
 passwd
 sed -i '/^HOOKS=(/ s/filesystems/encrypt filesystems/' /etc/mkinitcpio.conf
-mkinitcpio -P
+mkinitcpio -P linux
