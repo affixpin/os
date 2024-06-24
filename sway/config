@@ -7,18 +7,18 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu dmenu_path | wmenu | xargs swaymsg exec -- rofi -show run
 
 ### Output configuration
 #
@@ -213,5 +213,16 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+
+output HDMI-A-1 scale 2
+xwayland enable
+exec mako
+
+input "type:keyboard" {
+    xkb_layout "us,ua,ru"
+    xkb_variant ","
+}
+# Start a terminal
+bindsym Control+space input * xkb_switch_layout next
 
 include /etc/sway/config.d/*
