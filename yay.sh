@@ -5,3 +5,5 @@ cd yay
 makepkg -si
 cd ../
 rm -rf yay
+
+yay -S librewolf
