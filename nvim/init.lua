@@ -12,7 +12,7 @@ require('packer').startup(function(use)
 	use 'tpope/vim-fugitive'
 	use 'jasonccox/vim-wayland-clipboard'
 
-	use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+	use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
 
 
 	use({
