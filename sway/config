@@ -205,7 +205,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while echo "$(date +'%Y-%m-%d %X')"; do sleep 1; done
 
     colors {
         statusline #ffffff
@@ -213,16 +213,18 @@ bar {
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
+include /etc/sway/config.d/*
 
 output HDMI-A-1 scale 2
 xwayland enable
-exec mako
 
 input "type:keyboard" {
     xkb_layout "us,ua,ru"
-    xkb_variant ","
+    xkb_variant "mac,macOS,mac"
+    xkb_options "grp:caps_toggle"
 }
-# Start a terminal
-bindsym Control+space input * xkb_switch_layout next
+input "type:mouse" {
+    natural_scroll enabled
+}
 
-include /etc/sway/config.d/*
+exec mako
