@@ -77,6 +77,7 @@ vim.o.relativenumber = true
 vim.o.number = true
 vim.o.termguicolors = true
 vim.o.tabstop = 2
+vim.o.clipboard = "unnamedplus"
 
 vim.keymap.set('n', '<leader>.', "@:", {})
 
